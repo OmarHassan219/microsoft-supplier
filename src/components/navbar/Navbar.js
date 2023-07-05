@@ -1,17 +1,20 @@
 import React, { useEffect, useState } from 'react'
 import './navbar.css'
 import logo from '../../assets/logo.png'
-import {  Link, NavLink } from'react-router-dom'
+import {  Link, NavLink, useNavigate } from'react-router-dom'
 import { auth } from '../../firebase/config'
 import { onAuthStateChanged, signOut } from 'firebase/auth'
 import { toast } from 'react-hot-toast'
 import { useDispatch, useSelector } from 'react-redux'
-import { SET_ACTIVE_USER, selectUserEmail, selectUserName } from '../../redux/slice/authSlice'
+import { REMOVE_ACTIVE_USER, SET_ACTIVE_USER, selectUserEmail, selectUserName } from '../../redux/slice/authSlice'
 import {BiUserCircle} from 'react-icons/bi'
 import {PiShoppingCartLight} from 'react-icons/pi'
 import {IoIosMenu} from 'react-icons/io'
 import {HashLink} from 'react-router-hash-link'
+import { AdminOnlyLink } from '../adminOnlyRoute/AdminOnlyroute'
+
 const Navbar = () => {
+  const navigate= useNavigate()
   const dispatch = useDispatch()
   useEffect(() => {
     onAuthStateChanged(auth, (user) => {
@@ -49,6 +52,12 @@ const handleSignout = () => {
   
   signOut(auth).then(() => {
     // Sign-out successful.
+dispatch(
+REMOVE_ACTIVE_USER()
+)
+
+
+
     toast.success('Sign-out successful', {
       style: {
         border: '1px solid #713200',
@@ -60,6 +69,11 @@ const handleSignout = () => {
         secondary: '#FFFAEE',
       },
     });
+
+navigate('/')
+
+
+
   }).catch((error) => {
     // An error happened.
     toast.error(error.message, {
@@ -99,9 +113,12 @@ menu.style.display = 'none'
   return (
     <div className='navbarr d-flex justify-content-center  '>
       <div className='text-center d-flex align-items-center flex-wrap '>
-        <Link className='nav-admin' to='/admin' >
+        <AdminOnlyLink>
+
+        <Link className='nav-admin' to='/admin/home' >
 Admin
         </Link>
+        </AdminOnlyLink>
         <Link to='/' >
 <img className='logo-img ' src={logo} alt='Microsoft Supplier'/>
 </Link>

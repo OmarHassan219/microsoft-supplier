@@ -5,6 +5,7 @@ import AddProducts from './addProducts/AddProducts'
 import {IoMdArrowDropright } from 'react-icons/io'
 import {IoClose } from 'react-icons/io5'
 import AllProducts from './allProducts/AllProducts'
+import Home from './home/Home'
 const Admin = () => {
 const [showAdminNav, setshowAdminNav] = useState(false)
 
@@ -42,7 +43,7 @@ const mobileAdminNav = (
 
 <div className='admin-pages'>
 <Routes>
-{/* <Route path='/admin/home' element={<Home />} /> */}
+<Route path='/home' element={<Home />} />
 <Route path='/add-product/:id' element={<AddProducts />} />
 <Route path='/all-products' element={<AllProducts />} />
 

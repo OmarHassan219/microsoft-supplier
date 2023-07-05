@@ -8,6 +8,7 @@ import Home from './pages/home/Home';
 import Admin from './pages/admin/Admin';
 import AboutUs from './pages/aboutUs/AboutUs';
 import Shop from './pages/shop/Shop';
+import AdminOnlyroute from './components/adminOnlyRoute/AdminOnlyroute';
 
 
 
@@ -21,7 +22,13 @@ function App() {
 <Route path="/" element={<Home/>}/>
 <Route path="/Sign-in" element={<Signin/>}/>
 <Route path="/register" element={<Register/>}/>
-<Route path="/admin/*" element={<Admin/>}/>
+<Route path="/admin/*" element={
+<AdminOnlyroute>
+
+<Admin/>
+
+</AdminOnlyroute>
+}/>
 <Route path="/about-us" element={<AboutUs/>}/>
 <Route path="/shop" element={<Shop/>}/>
 </Routes>
