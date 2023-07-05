@@ -3,6 +3,8 @@ import React, { useEffect, useState } from 'react'
 import { auth } from '../../firebase/config';
 import  toast  from 'react-hot-toast';
 import { useNavigate } from 'react-router-dom';
+import {BiArrowBack} from 'react-icons/bi'
+import { Link } from 'react-router-dom';
 const Register = () => {
       const navigate = useNavigate();
     const [formValues, setFormValues] = useState({
@@ -53,9 +55,38 @@ navigate('/');
   .catch((error) => {
     const errorCode = error.code;
     const errorMessage = error.message;
-    // openNotification("حدث خطأ ما ");
 
-    // ..
+if (errorCode === 'auth/email-already-in-use') {
+
+  
+      toast.error('Email Address Already exist', {
+        style: {
+          border: '1px solid #713200',
+          padding: '16px',
+          color: '#713200',
+        },
+        iconTheme: {
+          primary: '#713200',
+          secondary: '#FFFAEE',
+        },
+      });
+
+
+
+
+}else{
+  toast.error(errorMessage, {
+    style: {
+      border: '1px solid #713200',
+      padding: '16px',
+      color: '#713200',
+    },
+    iconTheme: {
+      primary: '#713200',
+      secondary: '#FFFAEE',
+    },
+  });
+}
   });
 }
 useEffect(() => {
@@ -89,6 +120,9 @@ useEffect(() => {
   <form onSubmit={handleSubmit}>
     <div className="form-container">
       <div className="form-sections mb">
+        <Link to='/sign-in'>
+          <BiArrowBack size={20} style={{cursor:"pointer"}}/>
+        </Link>
         <div className="heading-container">
           <h1 className="heading">Register</h1>
         </div>
