@@ -1,0 +1,124 @@
+import { createUserWithEmailAndPassword } from 'firebase/auth';
+import React, { useEffect, useState } from 'react'
+import { auth } from '../../firebase/config';
+import  toast  from 'react-hot-toast';
+import { useNavigate } from 'react-router-dom';
+const Register = () => {
+      const navigate = useNavigate();
+    const [formValues, setFormValues] = useState({
+        email: '',
+        password: '',
+        confirmPassword: '',
+      });
+    const handleSignin = ( e ) => {
+const {name, value} = e.target
+setFormValues({...formValues, [name]: value})
+
+    }
+
+
+const handleSubmit = (e) => {
+  e.preventDefault()
+  console.log(formValues)
+  createUserWithEmailAndPassword(auth, formValues.email, formValues.password)
+  .then((userCredential) => {
+    const user = userCredential.user;
+    // dispatch(
+    //   SET_ACTIVE_USER({
+    //     email: user.email,
+    //     userPhoto: user.photoURL,
+    //     userName: user.displayName,
+    //     userId: user.uid,
+    //   })
+    // );
+    // router.push('/')
+    toast.success('Registered Successfully', {
+        style: {
+          border: '1px solid #713200',
+          padding: '16px',
+          color: '#713200',
+        },
+        iconTheme: {
+          primary: '#713200',
+          secondary: '#FFFAEE',
+        },
+      });
+      setFormValues({
+        email: '',
+        password: '',
+        confirmPassword: '',
+      });
+navigate('/');
+  })
+  .catch((error) => {
+    const errorCode = error.code;
+    const errorMessage = error.message;
+    // openNotification("حدث خطأ ما ");
+
+    // ..
+  });
+}
+useEffect(() => {
+    if(formValues.password.length < 8 && formValues.password.length !== 0){
+        document.querySelector(".pop-password-message").style.display = "block";
+        document.querySelector(".login-btn").setAttribute('disabled' , '');
+
+    }else  
+    document.querySelector(".pop-password-message").style.display = "none";
+    document.querySelector(".login-btn").removeAttribute('disabled' , '');
+
+}, [formValues.password])
+
+
+useEffect(() => {
+
+      if (formValues.password !== formValues.confirmPassword) {
+
+                  document.querySelector(".pop-password").style.display = "block";
+                  document.querySelector(".login-btn").setAttribute('disabled' , '');
+
+      }else
+      {
+          document.querySelector(".pop-password").style.display = "none";
+          document.querySelector(".login-btn").removeAttribute('disabled' , '');
+
+      }
+}, [formValues.confirmPassword , formValues.password])
+  return (
+    <div className="login-container">
+  <form onSubmit={handleSubmit}>
+    <div className="form-container">
+      <div className="form-sections mb">
+        <div className="heading-container">
+          <h1 className="heading">Register</h1>
+        </div>
+      </div>
+      <div className="form-sections">
+        <div className="form-fields">
+          <label htmlFor="email">Email</label>
+          <input type="email" name="email"  value={formValues.email} id="email" onChange={(e) => handleSignin(e)} className="input-field" tabindex="1" required />
+        </div>
+        <div className="form-fields">
+          <label htmlFor="pass">Password</label>
+          {/* <div id="pass-field-container"> */}
+
+            <input type="password" name="password" value={formValues.password} id="pass" onChange={(e) => handleSignin(e)} className="input-field" required tabindex="2" />
+            <p className='pop-password-message' style={{fontSize:"11px" , color:"red" , display:"none"}} >Password should be 8 characters or more</p>
+         
+          <label for="pass">Confirm Password</label>
+          
+            <input type="password" name="confirmPassword" value={formValues.confirmPassword} id="pass" onChange={(e) => handleSignin(e)} className="input-field" required tabindex="2" />
+          <p className='pop-password' style={{fontSize:"11px" , color:"red" , display:"none"}} >Please make sure you typed your password correctly</p>
+        </div>
+        <div className="form-fields">
+          <button type="submit"  disabled className="login-btn" tabindex="4" >Register</button>
+        </div>
+      </div>
+     
+    </div>
+  </form>
+</div>
+  )
+}
+
+export default Register

@@ -1,0 +1,62 @@
+.why-us-section{
+    background-color: #F6F5F3;
+    min-height: 100vh;
+    font-size: 30px;
+    font-weight: 500;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+}
+
+
+.our-products h1{
+    font-size: 60px;
+    font-family:'Times New Roman', Times, serif;
+}
+
+
+.full-inventory{
+    background-color: rgb(7, 182, 7);
+    color: #fff;
+padding: 15px 10px;
+    text-align: center;
+    text-decoration: none;
+    margin-top: 40px;
+    display: block;
+    width: fit-content;
+}
+
+.full-inventory:hover{
+    background-color: rgb(6, 143, 6) ;
+}
+
+.contact-section{
+    padding: 55px 50px 30px 50px;
+}
+
+.contact-section .container{
+    max-width: 800px;
+    color: #7a7a7a;
+}
+
+.talk-to-us{
+    background-color: #72BC1F;
+    text-align: center;
+    color: #fff;
+}
+.talk-to-us .container{
+    padding: 200px 20px;
+
+}
+.talk-to-us p{
+    font-size: 20px;
+    margin-bottom: 40px;
+letter-spacing: 4px;    
+}
+
+.talk-to-us a{
+    color: #fff;
+    font-size: 5vw;
+    text-decoration: none;
+}

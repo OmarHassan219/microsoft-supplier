@@ -1,0 +1,33 @@
+.types{
+    width: 30%;
+}
+
+
+
+.types h4{
+    font-size: 100%;
+}
+
+
+.types p{
+    font-size: 13px;
+}
+
+.products-view{
+    width: 70%;
+}
+
+
+.types span{
+    color: #b4b0b0;
+}
+
+@media (max-width:767px) {
+    .types{
+        width: 100%;
+    }
+    .products-view{
+        width: 100%;
+    }
+    
+}

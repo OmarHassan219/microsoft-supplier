@@ -1,0 +1,13 @@
+.hero-section{
+    background-color: #003200;
+padding: 100px 0;
+}
+
+.hero-section .hero-image{
+    
+    width: 57%;
+}
+.hero-section .gif{
+width: 300px;
+max-width: 70%;
+}
