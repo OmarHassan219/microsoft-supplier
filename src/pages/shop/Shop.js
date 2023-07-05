@@ -31,6 +31,7 @@ const productssss = useSelector(SelectFilteredProducts)
 
 
 useEffect(() => {
+    
     dispatch(
         
 FILTER_PRODUCTS({
@@ -79,6 +80,7 @@ const handlePhysicalProducts = () => {
         
         
             )
+            setCurrentPage(1);
 
 }
 
@@ -93,6 +95,7 @@ const handleDigitalProducts = () => {
         
         
             )
+            setCurrentPage(1);
 
 
 }
@@ -110,7 +113,8 @@ const handleAll = () => {
         })
         
         
-            )
+        )
+        setCurrentPage(1);
 
 
 
