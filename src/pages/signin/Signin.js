@@ -4,8 +4,9 @@ import { Link, useNavigate } from 'react-router-dom';
 import { sendPasswordResetEmail, signInWithEmailAndPassword } from 'firebase/auth';
 import { auth } from '../../firebase/config';
 import  toast  from 'react-hot-toast';
-import { useDispatch } from 'react-redux';
-import { SET_ACTIVE_USER } from '../../redux/slice/authSlice';
+import { useDispatch, useSelector } from 'react-redux';
+import { SET_ACTIVE_USER, selectCurrentPathname } from '../../redux/slice/authSlice';
+
 const Signin = () => {
   const dispatch = useDispatch();
     const navigate = useNavigate();
@@ -14,7 +15,7 @@ const Signin = () => {
         password: '',
        
       });
-
+const currentPathname = useSelector(selectCurrentPathname);
 const handleForgetPass = () =>{
 if(formValues.email === ""){
     toast.error('Write Your Email and click on Forgot Password again', {
@@ -106,6 +107,9 @@ dispatch(SET_ACTIVE_USER({
         },
       });
 setFormValues({...formValues, email: '', password: ''})
+if(currentPathname){
+  navigate(currentPathname)
+}else
 navigate('/');
   })
   .catch((error) => {

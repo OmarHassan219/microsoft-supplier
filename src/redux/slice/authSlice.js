@@ -7,6 +7,7 @@ const initialState = {
     userName: null,
     userId: null,
     userPhoto: null,
+    currentPathname: null,
   };
 
   const authSlice = createSlice({
@@ -37,10 +38,13 @@ const initialState = {
         state.userId=null
         console.log(state.userEmail)
       },
+      SET_CURRENT_PATHNAME(state, action) {
+        state.currentPathname = action.payload.currentPathname;
+      },
     },
   });
   
-  export const { OPEN_LOGIN, CLOSE_LOGIN, SET_ACTIVE_USER, REMOVE_ACTIVE_USER } =
+  export const { OPEN_LOGIN, CLOSE_LOGIN, SET_ACTIVE_USER, REMOVE_ACTIVE_USER , SET_CURRENT_PATHNAME } =
     authSlice.actions;
   
   export const selectOpenLogin = (state) => state.auth.openLogin;
@@ -49,5 +53,6 @@ const initialState = {
   export const selectUserEmail = (state) => state.auth.userEmail;
   export const selectUserId = (state) => state.auth.userId;
   export const selectUserPhoto = (state) => state.auth.userPhoto;
+  export const selectCurrentPathname = (state) => state.auth.currentPathname;
   
   export default authSlice.reducer;
