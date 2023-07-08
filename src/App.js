@@ -9,14 +9,22 @@ import Admin from './pages/admin/Admin';
 import AboutUs from './pages/aboutUs/AboutUs';
 import Shop from './pages/shop/Shop';
 import AdminOnlyroute from './components/adminOnlyRoute/AdminOnlyroute';
+import ProductDetails from './pages/productDetails/ProductDetails';
+import { useSelector } from 'react-redux';
+import Cart from './components/cart/Cart';
 
 
 
 
 
 function App() {
+
+
+
+
   return (
     <div className="App">
+      <Cart/>
     <Navbar/>
 <Routes>
 <Route path="/" element={<Home/>}/>
@@ -31,6 +39,7 @@ function App() {
 }/>
 <Route path="/about-us" element={<AboutUs/>}/>
 <Route path="/shop" element={<Shop/>}/>
+<Route path="/shop/:name" element={<ProductDetails/>}/>
 </Routes>
 
 

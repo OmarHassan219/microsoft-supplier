@@ -58,7 +58,7 @@ duration: '3 Years',
 {plans.map((plan, index) => (
     
 
-<div className='col-lg-3 col-md-5 col-sm-5 col-xs-12 plan'>
+<div key={index} className='col-lg-3 col-md-5 col-sm-5 col-xs-12 plan'>
 <h3 className='mb-5 mt-2'>{plan.plan}</h3>
 
 <h4 className='price'>{plan.price}</h4>

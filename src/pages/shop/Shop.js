@@ -8,12 +8,12 @@ import {
   FILTER_PRODUCTS,
   SelectFilteredProducts,
 } from "../../redux/slice/filterSlice";
-import { SET_CURRENT_PATHNAME, selectIsLoggedIn } from "../../redux/slice/authSlice";
+import { SET_CURRENT_PATHNAME, selectIsLoggedIn, selectUserEmail } from "../../redux/slice/authSlice";
 import { useNavigate } from "react-router-dom";
 import  toast  from "react-hot-toast";
+
 const Shop = () => {
   const navigate = useNavigate()
-  const isLoggedIn = useSelector(selectIsLoggedIn);
   const dispatch = useDispatch();
   const data = useFetchHook("products");
   const Physical = data?.filter((item) => {
@@ -34,25 +34,34 @@ const Shop = () => {
   };
 
   const productssss = useSelector(SelectFilteredProducts);
+  const userEmail = useSelector(selectUserEmail);
 
+  const isLoggedIn = useSelector(selectIsLoggedIn);
 useEffect(() => {
- if(!isLoggedIn && window.location.pathname === "/shop"){
-  toast.error("Please Sign in to continue");
-  dispatch(
+  
+  
+    
+    
+    
+    
+    
+    if(window.location.pathname === "/shop" && !isLoggedIn){
+        console.log(isLoggedIn);
+
+
+    toast.error("Please Sign in to continue");
+    dispatch(
 SET_CURRENT_PATHNAME({
   currentPathname: window.location.pathname,
 })
-
-
-
-  )
+)
 navigate("/sign-in");
 
 
- }
+}
 
 
-}, [navigate]);
+}, [userEmail , dispatch, navigate]);
 
 
 

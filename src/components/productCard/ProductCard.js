@@ -5,6 +5,7 @@ import { Storage, db } from "../../firebase/config";
 import { deleteDoc, doc } from "firebase/firestore";
 import { toast } from "react-hot-toast";
 import { useNavigate } from "react-router-dom";
+import { Link } from "react-router-dom";
 const ProductCard = ({ products, editOrDelete }) => {
 const navigate = useNavigate();
     const handleDelete = (product) => {
@@ -68,7 +69,7 @@ try {
                 <button className="delete-button" onClick={()=>handleDelete(product)}>Delete</button>
               </div>
             ) : (
-              <button className="add-to-cart-button">View</button>
+              <Link to={`/shop/${name.replace(/ /g, '-')}`} className="add-to-cart-button">View</Link>
             )}
           </div>
         );

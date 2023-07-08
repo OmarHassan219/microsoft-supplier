@@ -2,7 +2,7 @@ import { createSlice } from '@reduxjs/toolkit'
 
 const initialState = {
     openLogin: false,
-    isLoggedIn: false,
+    isLoggedIn: true,
     userEmail: null,
     userName: null,
     userId: null,
@@ -40,6 +40,7 @@ const initialState = {
       },
       SET_CURRENT_PATHNAME(state, action) {
         state.currentPathname = action.payload.currentPathname;
+        
       },
     },
   });

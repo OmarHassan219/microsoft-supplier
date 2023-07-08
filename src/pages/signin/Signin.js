@@ -160,20 +160,20 @@ useEffect(() => {
       </div>
       <div className="form-sections">
         <div className="form-fields">
-          <label for="email">Email</label>
-          <input type="email" name="email" value={formValues.email} id="email" onChange={(e) => handleSignin(e)} className="input-field" tabindex="1" required />
+          <label htmlFor="email">Email</label>
+          <input type="email" name="email" value={formValues.email} id="email" onChange={(e) => handleSignin(e)} className="input-field" tabIndex="1" required />
         </div>
         <div className="form-fields">
-          <label for="pass">Password</label>
+          <label htmlFor="pass">Password</label>
           {/* <div id="pass-field-container"> */}
 
-            <input type="password" name="password" value={formValues.password} id="pass" onChange={(e) => handleSignin(e)} className="input-field" required tabindex="2" />
+            <input type="password" name="password" value={formValues.password} id="pass" onChange={(e) => handleSignin(e)} className="input-field" required tabIndex="2" />
             <p className='pop-password-message' style={{fontSize:"11px" , color:"red" , display:"none"}} >Password should be 8 characters or more</p>
          
           
         </div>
         <div className="form-fields">
-          <input type="submit" value="Sign In" className="login-btn" tabindex="4" />
+          <input type="submit" value="Sign In" className="login-btn" tabIndex="4" />
         </div>
       </div>
       <div className="form-sections">
