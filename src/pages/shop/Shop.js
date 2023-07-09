@@ -39,18 +39,18 @@ const Shop = () => {
 
   const isLoggedInShop = useSelector(selectIsLoggedIn);
   
-// useEffect(() => {
-//   dispatch(
-//     OPEN_LOADING()
-//   )
-//   const delay = setTimeout(() => {
-//     dispatch(
-//       CLOSE_LOADING()
-//     )
-//   }, 3000); 
+useEffect(() => {
+  dispatch(
+    OPEN_LOADING()
+  )
+  const delay = setTimeout(() => {
+    dispatch(
+      CLOSE_LOADING()
+    )
+  }, 3000); 
 
-//   return () => clearTimeout(delay);
-// }, [dispatch]);
+  return () => clearTimeout(delay);
+}, [dispatch]);
 
 
 
@@ -58,7 +58,7 @@ const Shop = () => {
 
 useEffect(() => {
 
-    if(window.location.pathname === "/shop" && !isLoggedInShop){
+    if(window.location.pathname.includes("/shop") && !isLoggedInShop){
 
 
     toast.error("Please Sign in to continue");
