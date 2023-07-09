@@ -37,32 +37,28 @@ const Shop = () => {
   const productssss = useSelector(SelectFilteredProducts);
   const userEmail = useSelector(selectUserEmail);
 
-  const isLoggedIn = useSelector(selectIsLoggedIn);
+  const isLoggedInShop = useSelector(selectIsLoggedIn);
   
 useEffect(() => {
   dispatch(
     OPEN_LOADING()
   )
-  // Simulate a delay to showcase the loader
   const delay = setTimeout(() => {
     dispatch(
       CLOSE_LOADING()
     )
-  }, 3000); // Set the desired delay time
+  }, 3000); 
 
-  // Clean up the timeout when the component unmounts
   return () => clearTimeout(delay);
 }, [dispatch]);
+
+
+
+
+
 useEffect(() => {
-  
-  
-    
-    
-    
-    
-    
-    if(window.location.pathname === "/shop" && !isLoggedIn){
-        console.log(isLoggedIn);
+
+    if(window.location.pathname === "/shop" && !isLoggedInShop){
 
 
     toast.error("Please Sign in to continue");
