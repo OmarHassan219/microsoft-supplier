@@ -8,10 +8,12 @@ import {
   FILTER_PRODUCTS,
   SelectFilteredProducts,
 } from "../../redux/slice/filterSlice";
-import { SET_CURRENT_PATHNAME, selectIsLoggedIn, selectUserEmail } from "../../redux/slice/authSlice";
+import { SET_ACTIVE_USER, SET_CURRENT_PATHNAME, selectIsLoggedIn, selectUserEmail } from "../../redux/slice/authSlice";
 import { useNavigate } from "react-router-dom";
 import  toast  from "react-hot-toast";
 import { CLOSE_LOADING, OPEN_LOADING } from "../../redux/slice/loadingSlice";
+import { onAuthStateChanged } from "firebase/auth";
+import { auth } from "../../firebase/config";
 
 const Shop = () => {
   const navigate = useNavigate()
@@ -55,25 +57,76 @@ useEffect(() => {
 
 
 
-
 useEffect(() => {
+  onAuthStateChanged(auth, (user) => {
+    if (user) {
+      // User is signed in, see docs for a list of available properties
+      
+      const uid = user.uid;
 
-    if(!isLoggedInShop){
+dispatch(
+  SET_ACTIVE_USER({
+    email: user.email,
+    userPhoto: user.photoURL,
+    userName: user.displayName,
+    userId: user.uid,
+  })
+);
 
-console.log(window.location.pathname)
+} else {
+  dispatch(
+    SET_CURRENT_PATHNAME({
+      currentPathname: window.location.pathname,
+    })
+    )
     toast.error("Please Sign in to continue");
-    dispatch(
-SET_CURRENT_PATHNAME({
-  currentPathname: window.location.pathname,
-})
-)
-navigate("/sign-in");
+      navigate("/sign-in");
+
+    }
+  });
+}, [dispatch, navigate])
 
 
-}
 
 
-}, [userEmail , dispatch, navigate]);
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+// useEffect(() => {
+
+//     if(!isLoggedInShop){
+
+// console.log(window.location.pathname)
+//     toast.error("Please Sign in to continue");
+//     dispatch(
+// SET_CURRENT_PATHNAME({
+//   currentPathname: window.location.pathname,
+// })
+// )
+// navigate("/sign-in");
+
+
+// }
+
+
+// }, [userEmail , dispatch, navigate]);
 
 
 
