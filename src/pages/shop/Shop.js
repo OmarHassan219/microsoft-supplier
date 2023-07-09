@@ -60,7 +60,7 @@ useEffect(() => {
 
     if(window.location.pathname.includes("/shop") && !isLoggedInShop){
 
-
+console.log(window.location.pathname)
     toast.error("Please Sign in to continue");
     dispatch(
 SET_CURRENT_PATHNAME({
