@@ -1,7 +1,6 @@
 import React, { useEffect, useState } from "react";
-import { useDispatch, useSelector } from "react-redux";
+import { useDispatch,  } from "react-redux";
 import { useLocation, useParams } from "react-router-dom";
-import { selectProducts } from "../../redux/slice/productsSlice";
 import useFetchHook from "../../hooks/useFetchHook";
 import "./productDetails.css";
 import { Swiper, SwiperSlide } from 'swiper/react';
@@ -9,11 +8,12 @@ import { Swiper, SwiperSlide } from 'swiper/react';
 import 'swiper/css';
 import 'swiper/css/free-mode';
 import 'swiper/css/pagination';
-import { FreeMode, Pagination , Navigation } from 'swiper/modules';
-import ProductCard from "../../components/productCard/ProductCard";
+import { Pagination , Navigation } from 'swiper/modules';
 import { Link } from "react-router-dom";
 import { Breadcrumb, Image } from "antd";
 import { UPDATE_CART } from "../../redux/slice/cartSlice";
+import { toast } from "react-hot-toast";
+import { CLOSE_LOADING, OPEN_LOADING } from "../../redux/slice/loadingSlice";
 
 
 
@@ -25,11 +25,24 @@ const ProductDetails = () => {
 const [clickedProduct, setClickedProduct] = useState('')
 const [option, setOption] = useState('')
 const [quantity, setquantity] = useState(1)
-const [cart, setCart] = useState([])
+const [filteredProducts, setFilteredProducts] = useState([])
 
 useEffect(() => {
+  dispatch(
+    OPEN_LOADING()
+  )
+  // Simulate a delay to showcase the loader
+  const delay = setTimeout(() => {
+    dispatch(
+      CLOSE_LOADING()
+    )
+  }, 3000); // Set the desired delay time
+
+  // Clean up the timeout when the component unmounts
+  return () => clearTimeout(delay);
+}, [dispatch]);
+useEffect(() => {
     if(data){
-console.log(data);
         const product = data?.find(product => {
 
 
@@ -40,7 +53,14 @@ console.log(data);
             
         })
         setClickedProduct(product)
-       
+       const filter = data?.filter(product => {
+        
+        return product.name.replace(/ /g, "-") !== name.name
+        
+        
+        
+       })
+       setFilteredProducts(filter)
     }
 }, [data , name])
 
@@ -48,11 +68,12 @@ const incVat =(parseFloat(clickedProduct.price) * parseFloat(clickedProduct.vat)
 
 const handleAddToCart =() => {
   
+  toast.success(`${clickedProduct.name} Added Successfully to Cart`)
 
     
 dispatch(
   UPDATE_CART({
-   cart,
+   
    clickedProduct,
    quantity,
    option,
@@ -206,7 +227,7 @@ const pathSnippets = location.pathname.split('/').filter((i) => i);
         modules={[Pagination , Navigation]}
         className="mySwiper mt-5"
       >
-        {data?.map((product, index) => {
+        {filteredProducts?.map((product, index) => {
     
    if(product.type === clickedProduct.type){
 const incVat =(parseFloat(product.price) * parseFloat(product.vat)) / 100 + parseFloat(product.price);
@@ -231,7 +252,7 @@ return(
               </p>
             </div>
              
-              <Link to={`/product/${product.name.replace(/ /g, '-')}`} className="add-to-cart-button">View</Link>
+              <Link to={`/shop/${product.name.replace(/ /g, '-')}`} className="add-to-cart-button">View</Link>
           </div>
 </SwiperSlide>
 

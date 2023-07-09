@@ -2,39 +2,56 @@ import { createSlice } from '@reduxjs/toolkit'
 
 const initialState = {
 cart: localStorage.getItem('cart') ? JSON.parse(localStorage.getItem('cart')) : [],
-cartQuantity: 0,
-cartAmount:0
+cartQuantity: localStorage.getItem('cart quan') ? parseInt(localStorage.getItem('cart quan')) : 0,
+cartAmount:0,
+openCart: false,
 }
 
 const cartSlice = createSlice({
   name: 'cart',
   initialState,
   reducers: {
+
+
+OPEN_CART: (state, action) => {
+state.openCart = true;
+
+},
+CLOSE_CART: (state, action) => {
+state.openCart = false;
+
+},
+
+DELETE_PRODUCT: (state, action) => {
+const filteredCart = state.cart.filter((item) => {
+
+    return item.id !== action.payload.id
+})
+
+state.cart = filteredCart
+localStorage.setItem('cart', JSON.stringify(state.cart))
+state.cartQuantity -= parseInt(action.payload.quantity);
+localStorage.setItem('cart quan', state.cartQuantity)
+
+},
+
+
+
+
+
 UPDATE_CART: (state, action) => {
-console.log(action.payload.cart)
 const { clickedProduct , quantity , option , calculatequantity} = action.payload;
 
 const updatedCart = state.cart?.findIndex(item => item?.id === clickedProduct?.id)
     if(updatedCart >= 0 ){
 
-state.cart[updatedCart].calculatequantity += calculatequantity;
-// state.cart[updatedCart].option += option;
-
-    //   const updatedCartItems = cart.map((cartProduct) => {
-    //     if(cartProduct.id === clickedProduct.id) return {
-    //       ...cartProduct,
-    //       quantity: cartProduct.quantity + quantity,
-    //       option : cartProduct.option +  option
-    //     }
-    //   })
-    
-//   state.cart = updatedCartItems
-      
+state.cart[updatedCart].calculatequantity += calculatequantity; 
+state.cart[updatedCart].quantity +=  quantity; 
     }
   
 else{
   clickedProduct.calculatequantity = calculatequantity;
-//   clickedProduct.option = option;
+  clickedProduct.quantity = quantity;
   const tempProduct =   {...clickedProduct }
   state.cart.push(tempProduct)
 
@@ -42,7 +59,8 @@ else{
 
 localStorage.setItem('cart', JSON.stringify(state.cart))
 
-
+state.cartQuantity += parseInt(quantity);
+localStorage.setItem('cart quan', state.cartQuantity)
 
 
 
@@ -68,9 +86,10 @@ localStorage.setItem('cart', JSON.stringify(state.cart))
   }
 });
 
-export const {UPDATE_CART} = cartSlice.actions
+export const {UPDATE_CART , OPEN_CART , CLOSE_CART ,DELETE_PRODUCT } = cartSlice.actions
 export const SelectCart = state => state.cart.cart
 export const SelectQuantity = state => state.cart.cartQuantity
 export const SelectAmount = state => state.cart.cartAmount
+export const SelectOpenCart = state => state.cart.openCart
 
 export default cartSlice.reducer

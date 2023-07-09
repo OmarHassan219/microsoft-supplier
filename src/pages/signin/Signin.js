@@ -6,6 +6,7 @@ import { auth } from '../../firebase/config';
 import  toast  from 'react-hot-toast';
 import { useDispatch, useSelector } from 'react-redux';
 import { SET_ACTIVE_USER, selectCurrentPathname } from '../../redux/slice/authSlice';
+import { CLOSE_LOADING, OPEN_LOADING } from '../../redux/slice/loadingSlice';
 
 const Signin = () => {
   const dispatch = useDispatch();
@@ -68,6 +69,20 @@ if(formValues.email === ""){
 }
 
 
+useEffect(() => {
+  dispatch(
+    OPEN_LOADING()
+  )
+  // Simulate a delay to showcase the loader
+  const delay = setTimeout(() => {
+    dispatch(
+      CLOSE_LOADING()
+    )
+  }, 3000); // Set the desired delay time
+
+  // Clean up the timeout when the component unmounts
+  return () => clearTimeout(delay);
+}, [dispatch]);
 
 
     const handleSignin = ( e ) => {

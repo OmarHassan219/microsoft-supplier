@@ -11,6 +11,7 @@ import {
 import { SET_CURRENT_PATHNAME, selectIsLoggedIn, selectUserEmail } from "../../redux/slice/authSlice";
 import { useNavigate } from "react-router-dom";
 import  toast  from "react-hot-toast";
+import { CLOSE_LOADING, OPEN_LOADING } from "../../redux/slice/loadingSlice";
 
 const Shop = () => {
   const navigate = useNavigate()
@@ -37,6 +38,21 @@ const Shop = () => {
   const userEmail = useSelector(selectUserEmail);
 
   const isLoggedIn = useSelector(selectIsLoggedIn);
+  
+useEffect(() => {
+  dispatch(
+    OPEN_LOADING()
+  )
+  // Simulate a delay to showcase the loader
+  const delay = setTimeout(() => {
+    dispatch(
+      CLOSE_LOADING()
+    )
+  }, 3000); // Set the desired delay time
+
+  // Clean up the timeout when the component unmounts
+  return () => clearTimeout(delay);
+}, [dispatch]);
 useEffect(() => {
   
   

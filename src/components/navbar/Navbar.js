@@ -12,6 +12,8 @@ import {PiShoppingCartLight} from 'react-icons/pi'
 import {IoIosMenu} from 'react-icons/io'
 import {HashLink} from 'react-router-hash-link'
 import { AdminOnlyLink } from '../adminOnlyRoute/AdminOnlyroute'
+import { OPEN_CART, SelectQuantity } from '../../redux/slice/cartSlice'
+
 
 const Navbar = () => {
   const navigate= useNavigate()
@@ -35,7 +37,6 @@ const Navbar = () => {
   } else {
         // User is signed out
         // ...
-        console.log('User is signed out')
         setUserSignedIn(false)
   
       }
@@ -44,7 +45,7 @@ const Navbar = () => {
  const userName = useSelector(selectUserName)
  const userFullEmail = useSelector(selectUserEmail)
  const UserCutEmail = userFullEmail?.slice(0, userFullEmail.indexOf('@'))
-  
+  const cartQuantity = useSelector(SelectQuantity)
 const [userSignedIn, setUserSignedIn] = useState(false)
 
 const handleSignout = () => {
@@ -94,13 +95,26 @@ navigate('/')
 
 
 
+const handleCart = () => {
+
+dispatch(
+  OPEN_CART()
+)
+
+
+
+}
+
+
+
+
+
 
 const handleMenu = () => {
 const menu = document.querySelector('.navbar-links')
 if(menu.style.display === 'flex' && window.innerWidth <= 1025 ){
 menu.style.display = 'none'
 }else {
-  console.log(window.innerWidth);
   menu.style.display = 'flex'
 }
 
@@ -169,8 +183,8 @@ contact
 
 }
 <div className='cart'>
-  <PiShoppingCartLight  size={25} className='ms-4 cart-icon'/>
-  <p className='cart-count'>0</p>
+  <PiShoppingCartLight onClick={handleCart}  size={25} className='ms-4 cart-icon'/>
+  <p className='cart-count'>{cartQuantity}</p>
 </div>
 </div>
 

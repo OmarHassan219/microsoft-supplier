@@ -1,4 +1,4 @@
-import React, { useState } from 'react'
+import React, { useEffect, useState } from 'react'
 import './admin.css'
 import {Routes, Route, Link} from'react-router-dom'
 import AddProducts from './addProducts/AddProducts'
@@ -6,12 +6,15 @@ import {IoMdArrowDropright } from 'react-icons/io'
 import {IoClose } from 'react-icons/io5'
 import AllProducts from './allProducts/AllProducts'
 import Home from './home/Home'
+import { useDispatch } from 'react-redux'
+import { CLOSE_LOADING, OPEN_LOADING } from '../../redux/slice/loadingSlice'
+
 const Admin = () => {
 const [showAdminNav, setshowAdminNav] = useState(false)
 
+const dispatch = useDispatch()
 
 const mobileAdminNav = (
-
 <div onClick={() => setshowAdminNav(false)} className='mobile-admin-nav'>
     <IoClose className='icon' onClick={() => setshowAdminNav(false)} size={25} />
 <Link to='/admin/home'>Home</Link>
@@ -22,7 +25,20 @@ const mobileAdminNav = (
 )
 
 
+useEffect(() => {
+  dispatch(
+    OPEN_LOADING()
+  )
+  // Simulate a delay to showcase the loader
+  const delay = setTimeout(() => {
+    dispatch(
+      CLOSE_LOADING()
+    )
+  }, 3000); // Set the desired delay time
 
+  // Clean up the timeout when the component unmounts
+  return () => clearTimeout(delay);
+}, [dispatch]);
 
   return (
     <div className='admin d-flex '>

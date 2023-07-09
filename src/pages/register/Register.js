@@ -5,6 +5,8 @@ import  toast  from 'react-hot-toast';
 import { useNavigate } from 'react-router-dom';
 import {BiArrowBack} from 'react-icons/bi'
 import { Link } from 'react-router-dom';
+import { CLOSE_LOADING, OPEN_LOADING } from '../../redux/slice/loadingSlice';
+import { useDispatch } from 'react-redux';
 const Register = () => {
       const navigate = useNavigate();
     const [formValues, setFormValues] = useState({
@@ -99,6 +101,25 @@ useEffect(() => {
     document.querySelector(".login-btn").removeAttribute('disabled' , '');
 
 }, [formValues.password])
+
+const dispatch = useDispatch();
+
+
+useEffect(() => {
+  dispatch(
+    OPEN_LOADING()
+  )
+  // Simulate a delay to showcase the loader
+  const delay = setTimeout(() => {
+    dispatch(
+      CLOSE_LOADING()
+    )
+  }, 3000); // Set the desired delay time
+
+  // Clean up the timeout when the component unmounts
+  return () => clearTimeout(delay);
+}, [dispatch]);
+
 
 
 useEffect(() => {

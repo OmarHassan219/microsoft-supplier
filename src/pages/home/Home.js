@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react'
+import React, { useEffect } from 'react'
 import Hero from '../../components/hero/Hero'
 import './home.css'
 import Mss from '../../components/mssSection/Mss'
@@ -7,21 +7,28 @@ import Mss from '../../components/mssSection/Mss'
 // import ProductCard from '../../components/productCard/ProductCard'
 // import { Link } from 'react-router-dom'
 import Plans from '../../components/plans/Plans'
+import { useDispatch } from 'react-redux'
+import { CLOSE_LOADING, OPEN_LOADING } from '../../redux/slice/loadingSlice'
 
 const Home = () => {
-// const [fourProducts, setFourProducts] = useState([])
 
-
-
-  // const data = useFetchHook("products");
-  // const SlicedData = data?.slice(0 , 4);
-  // useEffect(() => {
-    
-  // console.log(SlicedData);
-  
-  // }, [])
+const dispatch = useDispatch()
   
 
+  useEffect(() => {
+    dispatch(
+      OPEN_LOADING()
+    )
+    // Simulate a delay to showcase the loader
+    const delay = setTimeout(() => {
+      dispatch(
+        CLOSE_LOADING()
+      )
+    }, 3000); // Set the desired delay time
+  
+    // Clean up the timeout when the component unmounts
+    return () => clearTimeout(delay);
+  }, [dispatch]);
   return (
     <div className='home'>
       <Hero/>

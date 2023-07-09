@@ -1,11 +1,39 @@
-import React from 'react'
+import React, { useEffect } from 'react'
 import Msimg from '../../assets/logo-aboutus (1).png'
 import './aboutUs.css'
 import eye from '../../assets/icons8-eye-48.png'
 import hand from '../../assets/icons8-handshake-48.png'
 import disclaimer from '../../assets/icons8-copyright-48.png'
+import { CLOSE_LOADING, OPEN_LOADING } from '../../redux/slice/loadingSlice'
+import { useDispatch } from 'react-redux'
 
 const AboutUs = () => {
+const dispatch = useDispatch()
+
+  useEffect(() => {
+    dispatch(
+      OPEN_LOADING()
+    )
+    // Simulate a delay to showcase the loader
+    const delay = setTimeout(() => {
+      dispatch(
+        CLOSE_LOADING()
+      )
+    }, 3000); // Set the desired delay time
+
+    // Clean up the timeout when the component unmounts
+    return () => clearTimeout(delay);
+  }, [dispatch]);
+
+
+
+
+
+
+
+
+
+
   return (
     <div className='about-us'>
 <div className='containerr'>

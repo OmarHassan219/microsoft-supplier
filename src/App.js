@@ -1,7 +1,7 @@
 
 import Navbar from './components/navbar/Navbar';
 import './App.css';
-import {Routes , Route } from'react-router-dom';
+import {Routes , Route, useLocation } from'react-router-dom';
 import Signin from './pages/signin/Signin';
 import Register from './pages/register/Register';
 import Home from './pages/home/Home';
@@ -12,21 +12,27 @@ import AdminOnlyroute from './components/adminOnlyRoute/AdminOnlyroute';
 import ProductDetails from './pages/productDetails/ProductDetails';
 import { useSelector } from 'react-redux';
 import Cart from './components/cart/Cart';
-
-
-
+import { SelectOpenCart } from './redux/slice/cartSlice';
+import { AnimatePresence } from 'framer-motion';
+import { SelectIsLoading } from './redux/slice/loadingSlice'
+import Loader from './components/loader/Loader';
 
 
 function App() {
+  const isLoading = useSelector(SelectIsLoading)
 
-
-
+const cartControl = useSelector(SelectOpenCart)
+const location = useLocation();
 
   return (
     <div className="App">
-      <Cart/>
+      {isLoading ? <Loader/> : null}
+
+      {cartControl ? <Cart/> : null}
     <Navbar/>
-<Routes>
+    <AnimatePresence  mode='wait' >
+
+<Routes location={location} key={location.key} >
 <Route path="/" element={<Home/>}/>
 <Route path="/Sign-in" element={<Signin/>}/>
 <Route path="/register" element={<Register/>}/>
@@ -42,6 +48,7 @@ function App() {
 <Route path="/shop/:name" element={<ProductDetails/>}/>
 </Routes>
 
+</AnimatePresence>
 
 
     </div>
