@@ -73,7 +73,7 @@ navigate("/sign-in");
 }
 
 
-}, [userEmail , dispatch, navigate , isLoggedInShop]);
+}, [userEmail , dispatch, navigate]);
 
 
 
