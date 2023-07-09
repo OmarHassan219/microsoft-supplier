@@ -39,18 +39,18 @@ const Shop = () => {
 
   const isLoggedInShop = useSelector(selectIsLoggedIn);
   
-useEffect(() => {
-  dispatch(
-    OPEN_LOADING()
-  )
-  const delay = setTimeout(() => {
-    dispatch(
-      CLOSE_LOADING()
-    )
-  }, 3000); 
+// useEffect(() => {
+//   dispatch(
+//     OPEN_LOADING()
+//   )
+//   const delay = setTimeout(() => {
+//     dispatch(
+//       CLOSE_LOADING()
+//     )
+//   }, 3000); 
 
-  return () => clearTimeout(delay);
-}, [dispatch]);
+//   return () => clearTimeout(delay);
+// }, [dispatch]);
 
 
 
@@ -73,7 +73,7 @@ navigate("/sign-in");
 }
 
 
-}, [userEmail , dispatch, navigate]);
+}, [userEmail , dispatch, navigate , isLoggedInShop]);
 
 
 
