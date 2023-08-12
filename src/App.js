@@ -16,6 +16,8 @@ import { SelectOpenCart } from './redux/slice/cartSlice';
 import { AnimatePresence } from 'framer-motion';
 import { SelectIsLoading } from './redux/slice/loadingSlice'
 import Loader from './components/loader/Loader';
+import CheckoutSucess from './pages/checkoutSuccess/CheckoutSucess';
+import CheckOut from './pages/checkOut/CheckOut';
 
 
 function App() {
@@ -46,6 +48,9 @@ const location = useLocation();
 <Route path="/about-us" element={<AboutUs/>}/>
 <Route path="/shop" element={<Shop/>}/>
 <Route path="/shop/:name" element={<ProductDetails/>}/>
+<Route path="/checkout" element={<CheckOut/>}/>
+<Route path="/checkout-success" element={<CheckoutSucess/>}/>
+
 </Routes>
 
 </AnimatePresence>

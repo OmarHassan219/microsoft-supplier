@@ -3,7 +3,7 @@ import { createSlice } from '@reduxjs/toolkit'
 const initialState = {
     openLogin: false,
     isLoggedIn: true,
-    userEmail: null,
+    userEmail: localStorage.getItem('email') ? localStorage.getItem('email') : null,
     userName: null,
     userId: null,
     userPhoto: null,
@@ -27,6 +27,8 @@ const initialState = {
         state.userName=userName
         state.userPhoto=userPhoto
         state.userEmail=email
+        localStorage.setItem('email' , email)
+
         state.userId=userId
       },
       REMOVE_ACTIVE_USER(state, action) {
@@ -35,6 +37,7 @@ const initialState = {
         state.userName=null
         state.userPhoto=null
         state.userEmail=null
+        localStorage.setItem('email' , null)
         state.userId=null
         console.log(state.userEmail)
       },

@@ -7,15 +7,14 @@ const useFetchHook = (collectionName) => {
 
   useEffect(() => {
     const q = query(collection(db, collectionName),orderBy("createdAt", "asc"));
-    const unsubscribe = onSnapshot(q, (querySnapshot) => {
+   onSnapshot(q, (querySnapshot) => {
       const products = [];
       querySnapshot.forEach((doc) => {
         products.push({...doc.data() , id:doc.id});
       });
       setData(products)
-      // console.log(products);
     });
-  }, []);
+  }, [collectionName]);
 
   return data;
 };

@@ -151,12 +151,12 @@ if(addProduct.imageUrl){
   };
 
   return (
-    <div className="add-products">
+    <div className="add-products w-100">
       <div className="add-products-container">
         <h1 className="add-product-header">
           {AddorEdit ? "Add Product" : "Edit Product"}
         </h1>
-        <form className="add-product-form" onSubmit={ AddorEdit ? handleSubmit : handleEditFirestore}>
+        <form className="add-product-form w-100" onSubmit={ AddorEdit ? handleSubmit : handleEditFirestore}>
           <div>
             <label>Product Name:</label>
             <input

@@ -19,7 +19,7 @@ const navigate = useNavigate();
 
 try {
      deleteDoc(doc(db, "products", product.id));
-     toast.success(`${product.name} deleted successfully`, {
+     toast.success(`${product?.name} deleted successfully`, {
         style: {
           border: '1px solid #713200',
           padding: '16px',
@@ -64,9 +64,9 @@ try {
               </p>
             </div>
             {editOrDelete ? (
-              <div className="edit-delete-buttons">
-                <button className="edit-button" onClick={()=>handleEdit(product)}>Edit</button>
-                <button className="delete-button" onClick={()=>handleDelete(product)}>Delete</button>
+              <div className="edit-delete-buttons d-flex">
+                <button type="button" className="edit-button" onClick={()=>handleEdit(product)}>Edit</button>
+                <button type="button" className="delete-button" onClick={()=>handleDelete(product)}>Delete</button>
               </div>
             ) : (
               <Link to={`/shop/${name.replace(/ /g, '-')}`} className="add-to-cart-button">View</Link>

@@ -34,7 +34,7 @@ useEffect(() => {
     dispatch(
       CLOSE_LOADING()
     )
-  }, 3000); // Set the desired delay time
+  }, 1300); // Set the desired delay time
 
   // Clean up the timeout when the component unmounts
   return () => clearTimeout(delay);

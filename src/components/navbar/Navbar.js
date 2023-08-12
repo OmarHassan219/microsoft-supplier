@@ -23,7 +23,6 @@ const Navbar = () => {
       if (user) {
         // User is signed in, see docs for a list of available properties
         
-        const uid = user.uid;
   setUserSignedIn(true)
   dispatch(
     SET_ACTIVE_USER({
@@ -41,7 +40,7 @@ const Navbar = () => {
   
       }
     });
-  }, [])
+  }, [dispatch])
  const userName = useSelector(selectUserName)
  const userFullEmail = useSelector(selectUserEmail)
  const UserCutEmail = userFullEmail?.slice(0, userFullEmail.indexOf('@'))
