@@ -47,8 +47,8 @@ const CheckOut = () => {
     return () => clearTimeout(delay);
   }, [dispatch]);
 
-const plan = useSelector(Selectplan)
-const planarr = [plan]
+
+
 const price = useSelector(Selectprice)
 // const duration = useSelector(Selectduration)
 

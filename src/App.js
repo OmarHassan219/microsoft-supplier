@@ -28,9 +28,9 @@ const location = useLocation();
 
   return (
     <div className="App">
-      {isLoading ? <Loader/> : null}
+      {isLoading ? <Loader/> : ''}
 
-      {cartControl ? <Cart/> : null}
+      {cartControl ? <Cart/> : ''}
     <Navbar/>
     <AnimatePresence  mode='wait' >
 

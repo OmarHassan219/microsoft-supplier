@@ -3,11 +3,11 @@ import { createSlice } from '@reduxjs/toolkit'
 const initialState = {
     openLogin: false,
     isLoggedIn: true,
-    userEmail: localStorage.getItem('email') ? localStorage.getItem('email') : null,
-    userName: null,
-    userId: null,
-    userPhoto: null,
-    currentPathname: null,
+    userEmail: localStorage.getItem('email') ? localStorage.getItem('email') : "",
+    userName: "",
+    userId: "",
+    userPhoto: "",
+    currentPathname: "",
   };
 
   const authSlice = createSlice({
@@ -37,7 +37,7 @@ const initialState = {
         state.userName=null
         state.userPhoto=null
         state.userEmail=null
-        localStorage.setItem('email' , null)
+        localStorage.removeItem('email')
         state.userId=null
         console.log(state.userEmail)
       },

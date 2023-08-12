@@ -49,8 +49,7 @@ if(formValues.email === ""){
         
   })
   .catch((error) => {
-    const errorCode = error.code;
-    const errorMessage = error.message;
+
     toast.error('Error: Failed to Send Password Reset Email', {
         style: {
           border: '1px solid #713200',
@@ -128,8 +127,7 @@ if(currentPathname){
 navigate('/');
   })
   .catch((error) => {
-    const errorCode = error.code;
-    const errorMessage = error.message;
+   
     toast.error(`Email Address/Password is not correct`, {
         style: {
           border: '1px solid #713200',

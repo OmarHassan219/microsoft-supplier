@@ -26,7 +26,7 @@ const handleSubmit = (e) => {
   console.log(formValues)
   createUserWithEmailAndPassword(auth, formValues.email, formValues.password)
   .then((userCredential) => {
-    const user = userCredential.user;
+    // const user = userCredential.user;
     // dispatch(
     //   SET_ACTIVE_USER({
     //     email: user.email,

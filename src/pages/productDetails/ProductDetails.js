@@ -48,14 +48,14 @@ useEffect(() => {
 
             return(
 
-                product.name.replace(/ /g, "-") === name.name
+                product.name.replace(/ /g, "-") === name?.name
                 )
             
         })
         setClickedProduct(product)
        const filter = data?.filter(product => {
         
-        return product.name.replace(/ /g, "-") !== name.name
+        return product.name.replace(/ /g, "-") !== name?.name
         
         
         
@@ -68,7 +68,7 @@ const incVat =(parseFloat(clickedProduct.price) * parseFloat(clickedProduct.vat)
 
 const handleAddToCart =() => {
   
-  toast.success(`${clickedProduct.name} Added Successfully to Cart`)
+  toast.success(`${clickedProduct?.name} Added Successfully to Cart`)
 
     
 dispatch(
@@ -239,11 +239,11 @@ return(
 
 <div  className="all-products-swiper">
             <div className="image-container">
-              <img src={product.imageUrl} alt={product.name} className="product-image" />
+              <img src={product.imageUrl} alt={product?.name} className="product-image" />
             </div>
             <div className="products-card-text">
               <p className={ product.type === `physical software` ? `product-type` : `product-type yellow` }>{product.type}</p>
-              <h3 className="product-name mb-3">{product.name}</h3>
+              <h3 className="product-name mb-3">{product?.name}</h3>
               <p className="product-price">
                 <span style={{color:'blue',fontWeight:'bold'}}>Excl.</span> VAT € <span className="theprice">{parseFloat(product.price).toFixed(2)}</span> (Price Per Unit)
               </p>
@@ -252,7 +252,7 @@ return(
               </p>
             </div>
              
-              <Link to={`/shop/${product.name.replace(/ /g, '-')}`} className="add-to-cart-button">View</Link>
+              <Link to={`/shop/${product?.name.replace(/ /g, '-')}`} className="add-to-cart-button">View</Link>
           </div>
 </SwiperSlide>
 
